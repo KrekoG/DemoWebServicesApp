@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:8080
+
+### Ping route
+GET {{baseUrl}}/v1/ping
+# header-name: header-value
+
+# Optional payload

@@ -1,0 +1,14 @@
+services:
+  app:
+    container_name: "demo-web-services-app"
+    build:
+      dockerfile: app.Dockerfile
+      args:
+        - war_name=demo-0.0.1-SNAPSHOT.war
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/v1/ping" ]
+      interval: 2s
+      timeout: 3s
+      retries: 5
