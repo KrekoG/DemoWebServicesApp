@@ -1,0 +1,45 @@
+# url variables, for easier maintainability:
+# movie routes base url -> http://localhost:8080/v1/movies
+@baseUrl = http://localhost:8080
+@apiVersion = /v1
+@moviesRoute = {{baseUrl}}{{apiVersion}}/movies
+
+### OPTIONS
+# Check your options for this endpoint. Think discoverability!
+OPTIONS {{moviesRoute}}/
+
+### HEAD
+# Check for the availablitity of the resource, without downloading the said resource!
+HEAD {{moviesRoute}}/
+
+### POST - CREATE
+# Add a new resource!
+POST {{moviesRoute}}/
+Content-Type: application/json
+
+{
+    "title": "Titanic",
+    "description": "It's a movie about a pretty decent ship, that sinks and adultery.",
+    "director": "James Cameron"
+}
+
+### GET - READ
+# Get the resource! - Mind the Id at the end of the URL!
+GET {{moviesRoute}}/1
+Cache-Control: no-cache
+Accept: */*
+
+### PUT - UPDATE
+# Modify the resource! - Mind the Id at the end of the URL!
+PUT {{moviesRoute}}/1
+Content-Type: application/json
+
+{
+    "title": "Titanic",
+    "description": "It's a movie about a pretty decent ship,jadjfghjsd that sinks and adultery.",
+    "director": "James Cameron"
+}
+
+### DELETE - DELETE
+# Delete the resource! - Mind the Id at the end of the URL!
+DELETE {{moviesRoute}}/1
