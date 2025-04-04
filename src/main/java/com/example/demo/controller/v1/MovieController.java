@@ -2,6 +2,7 @@ package com.example.demo.controller.v1;
 
 import com.example.demo.entity.Movie;
 import com.example.demo.entity.dto.MovieDto;
+import com.example.demo.entity.mapper.MovieMapper;
 import com.example.demo.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -27,35 +28,46 @@ public class MovieController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Movie>> allMovies() {
-        return ResponseEntity.ok(movieService.findAll());
+    public List<MovieDto> allMovies() {
+        return movieService.findAll().stream().map(this::toDto).toList();
     }
 
     @PostMapping("/")
-    public ResponseEntity<MovieDto> createMovie(
+    public MovieDto createMovie(
             @RequestBody MovieDto movieDto,
             BindingResult bindingResult
     ) {
-        return ResponseEntity.ok(movieService.create(movieDto));
+        return toDto(movieService.create(fromDto(movieDto)));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieDto> getMovie(@PathVariable Long id) {
-        return ResponseEntity.ok(movieService.read(id));
+    public MovieDto getMovie(@PathVariable Long id) {
+        return toDto(movieService.read(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MovieDto> updateMovie(
+    public MovieDto updateMovie(
             @PathVariable Long id,
             @RequestBody MovieDto movieDto
     ) {
-        return ResponseEntity.ok(movieService.update(id, movieDto));
+        return toDto(movieService.update(
+                id,
+                fromDto(movieDto)
+        ));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         movieService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    private Movie fromDto(MovieDto movieDto) {
+        return MovieMapper.INSTANCE.toMovie(movieDto);
+    }
+
+    private MovieDto toDto(Movie movie) {
+        return MovieMapper.INSTANCE.toMovieDto(movie);
     }
 
 }

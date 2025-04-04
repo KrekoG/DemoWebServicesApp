@@ -1,14 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Movie;
-import com.example.demo.entity.dto.MovieDto;
-import com.example.demo.entity.mapper.MovieMapper;
 import com.example.demo.repository.MovieRepository;
 import com.example.demo.repository.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -23,33 +20,30 @@ public class MovieService {
       return movieRepository.findAll();
    }
 
-   public MovieDto create(MovieDto movieDto) {
-      Movie newMovie = movieRepository.save(MovieMapper.INSTANCE.toMovie(movieDto));
-
-      return MovieMapper.INSTANCE.toMovieDto(newMovie);
+   public Movie create(Movie movie) {
+      return movieRepository.save(movie);
    }
 
-   public MovieDto read(Long id) {
-      Optional<Movie> movie = movieRepository.findById(id);
-
-      return movie.map(MovieMapper.INSTANCE::toMovieDto).orElse(null);
-   }
-
-   public MovieDto update(Long id, MovieDto movieDto) {
-      movieRepository.findById(id).orElseThrow(
+   public Movie read(Long id) {
+      return movieRepository.findById(id).orElseThrow(
               () -> new ResourceNotFoundException(
                       String.format("Movie not found by %s", id)
               )
       );
+   }
 
-      Movie newMovie = MovieMapper.INSTANCE.toMovie(movieDto);
+   public Movie update(Long id, Movie newMovie) {
+      ensureResourceExists(id);
       newMovie.setId(id);
-      movieRepository.save(newMovie);
-      return MovieMapper.INSTANCE.toMovieDto(newMovie);
+      return movieRepository.save(newMovie);
    }
 
    public void delete(Long id) {
       movieRepository.deleteById(id);
+   }
+
+   private void ensureResourceExists(Long id) {
+      read(id);
    }
 
 }
