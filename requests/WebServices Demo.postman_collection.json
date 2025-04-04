@@ -1,0 +1,393 @@
+{
+	"info": {
+		"_postman_id": "dc78f3b6-e050-49b1-bde0-6a8bb8f16e47",
+		"name": "WebServices Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31277716"
+	},
+	"item": [
+		{
+			"name": "SOAP",
+			"item": [
+				{
+					"name": "www.xyz.org/Quoation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version = \"1.0\"?>\n<SOAP-ENV:Envelope\n   xmlns:SOAP-ENV = \"http://www.w3.org/2001/12/soap-envelope\"\n   SOAP-ENV:encodingStyle = \"http://www.w3.org/2001/12/soap-encoding\">\n\n   <SOAP-ENV:Body xmlns:m = \"http://www.xyz.org/quotation\">\n      <m:GetQuotationResponse>\n         <m:Quotation>Here is the quotation</m:Quotation>\n      </m:GetQuotationResponse>\n   </SOAP-ENV:Body>\n</SOAP-ENV:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "www.xyz.org/quoation",
+							"host": [
+								"www",
+								"xyz",
+								"org"
+							],
+							"path": [
+								"quoation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JSON",
+			"item": [
+				{
+					"name": "www.xyz.org/quoation/MiscroSoft",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "www.xyz.org/quoation/MiscroSoft",
+							"host": [
+								"www",
+								"xyz",
+								"org"
+							],
+							"path": [
+								"quoation",
+								"MiscroSoft"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Demo",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "ping",
+							"item": [
+								{
+									"name": "OPTIONS",
+									"request": {
+										"method": "OPTIONS",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/v1/ping",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"ping"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "HEAD",
+									"request": {
+										"method": "HEAD",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/v1/ping",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"ping"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GET",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/v1/ping",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"ping"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "movie",
+							"item": [
+								{
+									"name": "Specific movie",
+									"item": [
+										{
+											"name": "DELETE / #",
+											"protocolProfileBehavior": {
+												"disabledSystemHeaders": {}
+											},
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8080/v1/movies/15",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"v1",
+														"movies",
+														"15"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "GET / #",
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8080/v1/movies/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"v1",
+														"movies",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "HEAD / #",
+											"request": {
+												"method": "HEAD",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8080/v1/movies/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"v1",
+														"movies",
+														""
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "PUT / #",
+											"protocolProfileBehavior": {
+												"disabledSystemHeaders": {}
+											},
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"title\": \"Titanic\",\n    \"description\": \"It's a movie about a pretty decent ship that sinks. Oh, and there is adultery. Oh, and Dicaprio dies\",\n    \"director\": \"James Cameron\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:8080/v1/movies/16",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"v1",
+														"movies",
+														"16"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "OPTIONS / #",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:8080/v1/movies/",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "8080",
+													"path": [
+														"v1",
+														"movies",
+														""
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "GET /",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/v1/movies/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"movies",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "HEAD /",
+									"request": {
+										"method": "HEAD",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/v1/movies/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"movies",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "POST /",
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"Titanic\",\n    \"description\": \"It's a movie about a pretty decent ship that sinks. Oh, and there is adultery.\",\n    \"director\": \"James Cameron\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/v1/movies/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"movies",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "OPTIONS /",
+									"request": {
+										"method": "OPTIONS",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/v1/movies/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"v1",
+												"movies",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
