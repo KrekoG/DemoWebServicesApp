@@ -1,12 +1,19 @@
 services:
   app:
-    container_name: "demo-web-services-app"
-    build:
-      dockerfile: app.Dockerfile
-      args:
-        - war_name=demo-0.0.1-SNAPSHOT.war
+    container_name: "demo-web-services-app-dev"
+    image: tomcat:11.0-jdk17-temurin
     ports:
       - 8080:8080
+      - 5005:5005
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      - JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    links:
+      - database
+    volumes:
+      - "./target/demo-0.0.1-SNAPSHOT.war:/usr/local/tomcat/webapps/ROOT.war"
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/v1/ping" ]
       interval: 2s
